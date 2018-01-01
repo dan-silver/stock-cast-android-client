@@ -24,7 +24,7 @@ import com.silver.dan.stockcast.callbacks.SimpleCallback;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AuthHelper {
+class AuthHelper {
     private static FirebaseUser user;
 
 
@@ -165,8 +165,8 @@ public class AuthHelper {
     public GoogleSignInOptions getGoogleGSO(Set<Scope> scopes) {
         GoogleSignInOptions.Builder gsoBuilder = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.web_client_id))
-                .requestServerAuthCode(context.getString(R.string.web_client_id), false);
-                //.requestEmail();
+                .requestServerAuthCode(context.getString(R.string.web_client_id), false)
+                .requestEmail();
 
         if (scopes != null) {
             for (Scope scope : scopes)
@@ -203,6 +203,8 @@ public class AuthHelper {
 //        AuthHelper.googleAccessToken = null;
         AuthHelper.user = null;
         AuthHelper.firebaseUserAccessToken = null;
+
+        StockListAdapter.clearStockList();
     }
     /*
     void sendAuthCode(String authCode, final OnCompleteCallback callback) {

@@ -82,7 +82,7 @@ public class AppSettingsTheme extends Fragment implements GoogleApiClient.OnConn
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.theme_settings, container, false);
         ButterKnife.bind(this, view);

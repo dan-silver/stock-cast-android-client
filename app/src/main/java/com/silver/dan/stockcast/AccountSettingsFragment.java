@@ -36,7 +36,7 @@ public class AccountSettingsFragment extends Fragment implements GoogleApiClient
     private GoogleApiClient mGoogleApiClient;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_account_settings, container, false);
         ButterKnife.bind(this, view);

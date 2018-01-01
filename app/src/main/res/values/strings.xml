@@ -18,7 +18,6 @@
     <string name="log_out" translatable="false">Log Out</string>
     <string name="minutes">minutes</string>
     <string name="cast_namespace" translatable="false">urn:x-cast:com.silver.dan.stockcast</string>
-    <string name="news">News</string>
     <string name="add_stock">Add Stock</string>
     <string name="stock_name_or_symbol">Stock symbol or company name</string>
     <string name="chartRange">Chart Range</string>

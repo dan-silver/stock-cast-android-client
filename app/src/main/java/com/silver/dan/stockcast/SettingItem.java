@@ -29,15 +29,12 @@ public class SettingItem extends FrameLayout {
     public SettingItem(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //Inflate and attach your child XML
+        // Inflate and attach your child XML
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.setting_item_layout, this, true);
 
-        //Get a reference to the layout where you want children to be placed
-        mContentView = (LinearLayout) findViewById(R.id.content);
-
-        //Do any more custom init you would like to access children and do setup
-
+        // Get a reference to the layout where you want children to be placed
+        mContentView = findViewById(R.id.content);
     }
 
 
@@ -46,7 +43,7 @@ public class SettingItem extends FrameLayout {
         if (mContentView == null) {
             super.addView(child, index, params);
         } else {
-            //Forward these calls to the content view
+            // Forward these calls to the content view
             mContentView.addView(child, index, params);
         }
     }

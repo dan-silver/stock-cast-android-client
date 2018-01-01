@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.auth0.android.jwt.JWT;
@@ -46,9 +45,6 @@ public class MainActivity extends AppCompatActivity  {
     AppBarLayout appBarLayout;
 
     public static final String TAG = "StockCast";
-    private TabSwitcher adapter;
-
-    private MenuItem mediaRouteMenuItem;
 
     private CastContext mCastContext;
     private CastSession mCastSession;
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.navigation, menu);
-        mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
+        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
         return true;
     }
 
@@ -176,8 +172,7 @@ public class MainActivity extends AppCompatActivity  {
         // Set a Toolbar to replace the ActionBar.
         setSupportActionBar(top_toolbar);
 
-
-        adapter = new TabSwitcher(getSupportFragmentManager());
+        TabSwitcher adapter = new TabSwitcher(getSupportFragmentManager());
 
         // add fragments as pages
         adapter.addFragment(new StockListFragment());

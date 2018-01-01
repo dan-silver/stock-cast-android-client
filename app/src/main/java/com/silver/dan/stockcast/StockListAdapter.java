@@ -99,6 +99,10 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         }
     }
 
+    public static void clearStockList() {
+        stockList.clear();
+    }
+
     public void actionModeDismissed() {
         setInMultiSelectMode(false);
 
@@ -194,10 +198,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         stock.setOnStockSelectionChangeListener(new StockSelectedCallback() {
             @Override
             public void onSelectionChange(boolean isSelected) {
-//                if (!updateBackgroundColorOnly) {
                 customViewHolder.multiSelectStockBtn.setChecked(isSelected);
-//                }
-
                 customViewHolder.listItemView.setBackgroundColor(isSelected ? greyColor : transparentColor);
             }
         });
@@ -230,7 +231,6 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                 stock.toggleSelected();
 
                 if (inMultiSelectMode) {
-
                     // ensure up to max 4 stocks selected
                     List<Stock> selectedStocks = getSelectedStocks();
                     if (selectedStocks.size() > MAX_STOCKS_SELECTED) {
@@ -244,13 +244,10 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                         }
                     }
 
-
                     db.setFocusedStocks(getSelectedStocks());
                 }
             }
         });
-
-
 
         customViewHolder.multiSelectStockBtn.setOnClickListener(new View.OnClickListener(){
 
@@ -271,9 +268,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         customViewHolder.listItemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (inMultiSelectMode) {
-                    stock.toggleSelected();
-                } else {
+                if (!inMultiSelectMode) {
                     // launch multiselect mode
                     setInMultiSelectMode(true);
                     // deselect all other stocks
@@ -285,6 +280,8 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                     stock.setIsSelected(true);
                 }
 
+                db.setFocusedStocks(getSelectedStocks());
+
                 return true;
             }
         });
@@ -293,9 +290,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         customViewHolder.multiSelectStockBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                DatabaseService db = new DatabaseService(compoundButton.getContext());
                 stock.setIsSelectedUIOnly(b);
-//                db.setFocusedStocks(getSelectedStocks());
             }
         });
     }
