@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.silver.dan.stockcast.StockSearchActivity"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/loading_layout"
+        layout="@layout/loading" />
+
+    <EditText
+        android:id="@+id/stock_search_input"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:drawableStart="@drawable/ic_search_black_24dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/stock_name_or_symbol"
+        android:drawablePadding="10dp"
+        android:textColor="@color/primary_text"
+        android:layout_width="match_parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stock_search_results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

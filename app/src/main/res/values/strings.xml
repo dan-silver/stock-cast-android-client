@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Stock Cast</string>
+    <string name="stocks">Stocks</string>
+
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="remove">Remove</string>
+    <string name="background_color">Background Color</string>
+    <string name="done">Done</string>
+    <string name="text_color">Text Color</string>
+    <string name="s2_weeks">2 Weeks</string>
+    <string name="s1_week">1 Week</string>
+    <string name="s3_days">3 Days</string>
+    <string name="s1_month">1 Month</string>
+    <string name="s2_months">2 Months</string>
+    <string name="s3_months">3 Months</string>
+    <string name="seconds" translatable="false">seconds</string>
+    <string name="log_out" translatable="false">Log Out</string>
+    <string name="minutes">minutes</string>
+    <string name="cast_namespace" translatable="false">urn:x-cast:com.silver.dan.stockcast</string>
+    <string name="news">News</string>
+    <string name="add_stock">Add Stock</string>
+    <string name="stock_name_or_symbol">Stock symbol or company name</string>
+    <string name="chartRange">Chart Range</string>
+    <string name="error">Error</string>
+    <string name="save">Save</string>
+    <string name="displayMode">Display Mode</string>
+    <string name="loading">Loading</string>
+    <string name="Focus">Focus</string>
+    <string name="Slideshow">Slideshow</string>
+    <string name="search_for_stocks">Search for stocks</string>
+    <string name="slideshowDuration">Slideshow Speed</string>
+</resources>
