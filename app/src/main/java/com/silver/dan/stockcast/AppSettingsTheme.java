@@ -52,11 +52,6 @@ public class AppSettingsTheme extends Fragment implements GoogleApiClient.OnConn
         mDb.addListener(new StreamingCallback<UserData>() {
             @Override
             public void onData(UserData result) {
-                // for new users, this will be empty. Fall back to app defaults
-                if (result == null) {
-                    result = new UserData();
-                }
-
                 // chart range
                 chartRange = ChartRangeEnum.fromInt(result.chartConfig.range.rangeFlag);
                 chartRangeBtn.setSubHeaderText(chartRange.stringRes);

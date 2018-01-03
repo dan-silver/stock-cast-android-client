@@ -57,9 +57,7 @@ public class StockListFragment extends Fragment {
                 initializeListView(true);
 
                 List<Stock> stocks = new ArrayList<>();
-                if (result == null) {
-                    return;
-                }
+
                 for (String tickerAndExchange : result.stocks.keySet()) {
                     String[] exchangeAndSymbol = tickerAndExchange.split(":");
                     Stock s;

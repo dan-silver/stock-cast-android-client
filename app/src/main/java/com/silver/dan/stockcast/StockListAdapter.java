@@ -1,5 +1,6 @@
 package com.silver.dan.stockcast;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.silver.dan.stockcast.callbacks.MultiSelectModeChangeListener;
 import com.silver.dan.stockcast.callbacks.SimpleCallbackNoType;
 import com.silver.dan.stockcast.callbacks.StockSelectedCallback;
+import com.silver.dan.stockcast.db.DisplayMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -221,8 +224,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         customViewHolder.listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseService db = new DatabaseService(v.getContext());
-
+                exitSlideshowMode(v.getContext());
                 if (!inMultiSelectMode) {
                     db.setFocusedStock(stock);
                     deselectAllStocks();
@@ -250,24 +252,21 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         });
 
         customViewHolder.multiSelectStockBtn.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
-                // you might keep a reference to the CheckBox to avoid this class cast
+                exitSlideshowMode(v.getContext());
                 boolean checked = ((CheckBox)v).isChecked();
-                DatabaseService db = new DatabaseService(v.getContext());
+
                 stock.setIsSelected(checked);
                 db.setFocusedStocks(getSelectedStocks());
-
-                //                setSomeBoolean(checked);
             }
-
         });
 
         // long click -> select current and show all checkboxes
         customViewHolder.listItemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                exitSlideshowMode(view.getContext());
                 if (!inMultiSelectMode) {
                     // launch multiselect mode
                     setInMultiSelectMode(true);
@@ -278,9 +277,8 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                     }
 
                     stock.setIsSelected(true);
+                    db.setFocusedStocks(getSelectedStocks());
                 }
-
-                db.setFocusedStocks(getSelectedStocks());
 
                 return true;
             }
@@ -293,6 +291,15 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
                 stock.setIsSelectedUIOnly(b);
             }
         });
+    }
+
+    private void exitSlideshowMode(Context ctx) {
+        if (DatabaseService.GetUserDataFromCache().displayModeConfig.displayMode == DisplayMode.SlideShow.value) {
+            db.updateDisplayMode(DisplayMode.FOCUS);
+
+            Toast toast = Toast.makeText(ctx, "Exiting slideshow", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     List<Stock> getSelectedStocks() {

@@ -28,6 +28,7 @@ import static com.silver.dan.stockcast.MainActivity.TAG;
 public class DatabaseService {
     private static DatabaseReference mDatabase;
     private static DatabaseReference mUserReference;
+    private static UserData userDataCache;
 
     DatabaseService(Context context) {
         FirebaseUser user = AuthHelper.with(context).getFirebaseUser();
@@ -107,6 +108,14 @@ public class DatabaseService {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserData data = dataSnapshot.getValue(UserData.class);
+
+                // for new users, this will be empty. Fall back to app defaults
+                if (data == null) {
+                    data = new UserData();
+                }
+
+                userDataCache = data;
+
                 listener.onData(data);
             }
 
@@ -119,6 +128,10 @@ public class DatabaseService {
         };
 
         mUserReference.addValueEventListener(postListener);
+    }
+
+    public static UserData GetUserDataFromCache() {
+        return userDataCache;
     }
 
     void saveNewStock(Stock stock) {
